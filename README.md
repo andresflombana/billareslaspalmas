@@ -19,10 +19,15 @@ comparten este mismo backend (RN-05).
 
 ## Puesta en marcha
 1. `npm install`
-2. `cp .env.example .env` (el valor por defecto `file:./dev.db` ya sirve para desarrollo).
+2. Ya incluye un `.env` con valores reales funcionando (SQLite local + un `JWT_SECRET`
+   generado de forma segura) — no necesitas copiar ni editar nada para arrancar.
 3. `npx prisma migrate dev --name init` — crea el archivo de base de datos y todas las tablas a partir de `prisma/schema.prisma`.
 4. `npx prisma db seed` — carga usuarios base (admin/operador), las 2 barras y la configuración inicial del negocio.
 5. `npm run dev` — levanta la API en `http://localhost:4000` (activa automáticamente el modo WAL de SQLite al iniciar).
+
+Si en algún momento quieres un `JWT_SECRET` distinto (por ejemplo, uno propio para
+cuando esto se instale en el PC de Billar real, separado del de desarrollo), corre
+`npm run generate:secret` y pega el resultado en tu `.env` — es opcional, no bloquea nada.
 
 ## Respaldo (producción, PC de Billar)
 La base de datos completa es el archivo apuntado por `DATABASE_URL` (más los

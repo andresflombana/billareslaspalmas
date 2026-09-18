@@ -1,9 +1,10 @@
 import jwt from 'jsonwebtoken';
 import { env } from '../config/env';
+import { Rol } from '../constants/enums';
 
 export interface JwtPayload {
   sub: number;
-  rol: 'ADMINISTRADOR' | 'OPERADOR';
+  rol: Rol;
 }
 
 export function signToken(payload: JwtPayload): string {

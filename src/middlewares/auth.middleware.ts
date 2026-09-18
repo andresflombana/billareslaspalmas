@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { verifyToken, JwtPayload } from '../utils/jwt';
+import { Rol } from '../constants/enums';
 
 export interface AuthRequest extends Request {
   usuario?: JwtPayload;
@@ -21,7 +22,7 @@ export function requireAuth(req: AuthRequest, res: Response, next: NextFunction)
 
 // HU-03: guarda de rol — el Operador nunca debe poder llegar a rutas administrativas.
 // Se usa en los sprints siguientes así: router.get('/x', requireAuth, requireRole('ADMINISTRADOR'), handler)
-export function requireRole(...rolesPermitidos: Array<'ADMINISTRADOR' | 'OPERADOR'>) {
+export function requireRole(...rolesPermitidos: Rol[]) {
   return (req: AuthRequest, res: Response, next: NextFunction) => {
     if (!req.usuario || !rolesPermitidos.includes(req.usuario.rol)) {
       return res.status(403).json({ error: 'No tienes permiso para esta acción' });
