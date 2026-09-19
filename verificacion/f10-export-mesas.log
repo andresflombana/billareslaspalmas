@@ -1,0 +1,8 @@
+
+> las-palmas-frontend@0.2.0 export:mesas
+> node scripts/exportar-mesas.mjs
+
+[consola] Failed to load resource: the server responded with a status of 404 (Not Found)
+✓ public/mesas/mesa-libre.webp (16 KB)
+✓ public/mesas/mesa-ocupada.webp (20 KB)
+✓ public/mesas/mesa-fuera-servicio.webp (14 KB)

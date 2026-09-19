@@ -1,0 +1,4 @@
+
+> las-palmas-backend@0.2.0 typecheck
+> tsc -p tsconfig.test.json
+

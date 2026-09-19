@@ -1,0 +1,4 @@
+r1-typecheck: 0 
+r2-build: 0 
+r3-capturas: 0 
+FIN 

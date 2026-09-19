@@ -1,0 +1,5 @@
+Environment variables loaded from .env
+Running seed command `ts-node prisma/seed.ts` ...
+Seed completado: usuarios base, 2 barras, configuración inicial y 8 mesas de desarrollo.
+
+The seed command has been executed.

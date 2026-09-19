@@ -1,0 +1,36 @@
+
+> las-palmas-frontend@0.2.0 capturas
+> node scripts/capturas-ui.mjs
+
+✓ HU-01/HU-03: el Operador entra directo a /billar
+✓ HU-06: 8 mesas caben en 1366×768 sin scroll
+✓ La cuadrícula no monta contextos WebGL
+✓ Las ilustraciones WebP cargan en todas las tarjetas
+✓ Ilustración con alto útil en la tarjeta (99 px)
+✓ El Operador no ve acciones de administrador
+✓ HU-03: el menú del Operador tiene 3 módulos (MESAS, VENTA DIRECTA, LICORERA)
+✓ HU-07: "Abrir mesa" con un clic la pasa a En juego
+✓ La tarjeta ocupada muestra la hora de apertura y quién la abrió
+✓ HU-01: refrescar la página no cierra la sesión
+✓ Tras refrescar, Mesa 1 sigue En juego (dato del servidor)
+✓ El detalle monta una sola escena 3D (React Three Fiber)
+✓ Detalle: el Operador no ve anular/fuera de servicio
+✓ HU-03: /configuracion como Operador redirige a /billar
+✓ HU-16: abrir Barra 1 no abre Barra 2
+✓ HU-17: Barra 1 tiene 2 cuentas simultáneas (2)
+✓ No se puede cerrar una barra con cuentas abiertas
+✓ HU-01: el Administrador entra al Panel
+✓ HU-08: el Administrador ve "Reactivar"
+✓ HU-08: el Operador no ve "Reactivar"
+✓ El Operador ve el motivo de fuera de servicio
+✓ HU-08: reactivar la deja Disponible
+✓ Anular apertura exige motivo (botón deshabilitado sin motivo)
+✓ Anular apertura deja la mesa Disponible
+✓ Vista legible con 4 mesas (4 tarjetas)
+✓ HU-06: 4 mesas caben en 1366×768 sin scroll
+✓ Vista legible con 10 mesas (10 tarjetas)
+✓ HU-06: 10 mesas caben en 1366×768 sin scroll
+✓ Vista legible con 20 mesas (20 tarjetas)
+✓ Sin errores de JavaScript en consola
+
+30/30 verificaciones correctas. Capturas en: C:\Users\WIN10\Desktop\NODA\LAS PALMAS\SPRINT 1\las-palmas-frontend\capturas

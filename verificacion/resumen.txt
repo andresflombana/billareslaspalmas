@@ -1,0 +1,17 @@
+Verificacion Sprint 1 - vie. 18/09/2026 23:31:44,56 
+node v22.11.0 
+npm 10.9.0 
+b01-npm-install: 0 
+b02-migrate-deploy: 0 
+b03-migrate-diff: 0 
+b04-seed: 0 
+b05-typecheck: 0 
+b06-build: 0 
+b07-test: 0 
+f08-npm-install: 0 
+f09-typecheck: 0 
+f10-export-mesas: 0 
+f11-build: 0 
+FIN vie. 18/09/2026 23:35:20,75 
+f12-capturas: 1 
+f12-capturas: 0 

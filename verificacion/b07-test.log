@@ -1,0 +1,339 @@
+
+> las-palmas-backend@0.2.0 test
+> node scripts/test.js
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": SQLite database "test.db" at "file:./test.db"
+
+SQLite database test.db created at file:./test.db
+
+2 migrations found in prisma/migrations
+
+Applying migration `20260918053543_init`
+Applying migration `20260919030000_mesa_activa`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 20260918053543_init/
+    └─ migration.sql
+  └─ 20260919030000_mesa_activa/
+    └─ migration.sql
+      
+All migrations have been successfully applied.
+TAP version 13
+# Subtest: Sprint 1 — API de Mesas y Barra
+    # Subtest: HU-01 — sesión y /auth/me
+        # Subtest: login correcto devuelve token y rol
+        ok 1 - login correcto devuelve token y rol
+          ---
+          duration_ms: 155.9889
+          ...
+        # Subtest: el correo no distingue mayúsculas ni espacios
+        ok 2 - el correo no distingue mayúsculas ni espacios
+          ---
+          duration_ms: 202.567
+          ...
+        # Subtest: credenciales inválidas → 401 con mensaje genérico
+        ok 3 - credenciales inválidas → 401 con mensaje genérico
+          ---
+          duration_ms: 102.6727
+          ...
+        # Subtest: usuario desactivado no puede iniciar sesión → 403
+        ok 4 - usuario desactivado no puede iniciar sesión → 403
+          ---
+          duration_ms: 107.0152
+          ...
+        # Subtest: GET /auth/me devuelve el usuario de la sesión (restaurar al refrescar)
+        ok 5 - GET /auth/me devuelve el usuario de la sesión (restaurar al refrescar)
+          ---
+          duration_ms: 9.1446
+          ...
+        # Subtest: GET /auth/me con un usuario que fue desactivado después → 401
+        ok 6 - GET /auth/me con un usuario que fue desactivado después → 401
+          ---
+          duration_ms: 12.9692
+          ...
+        # Subtest: sin token o con token falso → 401
+        ok 7 - sin token o con token falso → 401
+          ---
+          duration_ms: 15.073
+          ...
+        1..7
+    ok 1 - HU-01 — sesión y /auth/me
+      ---
+      duration_ms: 608.1352
+      type: 'suite'
+      ...
+    # Subtest: HU-06 — cuadrícula de mesas
+        # Subtest: lista las mesas activas con estado, zona, tarifa y sin sesión
+        ok 1 - lista las mesas activas con estado, zona, tarifa y sin sesión
+          ---
+          duration_ms: 14.1801
+          ...
+        # Subtest: responde con el header Date (hora del servidor, base para el cronómetro de Sprint 2)
+        ok 2 - responde con el header Date (hora del servidor, base para el cronómetro de Sprint 2)
+          ---
+          duration_ms: 9.1804
+          ...
+        # Subtest: GET /tables/:id: 404 si no existe, 400 si el id no es válido
+        ok 3 - GET /tables/:id: 404 si no existe, 400 si el id no es válido
+          ---
+          duration_ms: 19.6257
+          ...
+        1..3
+    ok 2 - HU-06 — cuadrícula de mesas
+      ---
+      duration_ms: 43.9407
+      type: 'suite'
+      ...
+    # Subtest: HU-07 — abrir mesa
+        # Subtest: el Operador abre una mesa: OCUPADA, startedAt del servidor, venta con tarifa congelada y auditoría
+        ok 1 - el Operador abre una mesa: OCUPADA, startedAt del servidor, venta con tarifa congelada y auditoría
+          ---
+          duration_ms: 28.0236
+          ...
+        # Subtest: abrir una mesa ya ocupada → 409 MESA_OCUPADA y no crea otra venta
+        ok 2 - abrir una mesa ya ocupada → 409 MESA_OCUPADA y no crea otra venta
+          ---
+          duration_ms: 11.7289
+          ...
+        # Subtest: dos equipos abren la misma mesa a la vez: exactamente uno gana
+        ok 3 - dos equipos abren la misma mesa a la vez: exactamente uno gana
+          ---
+          duration_ms: 26.2889
+          ...
+        # Subtest: la tarifa queda congelada: editar la tarifa de una mesa en juego no cambia su sesión
+        ok 4 - la tarifa queda congelada: editar la tarifa de una mesa en juego no cambia su sesión
+          ---
+          duration_ms: 17.4389
+          ...
+        # Subtest: abrir una mesa inexistente → 404
+        ok 5 - abrir una mesa inexistente → 404
+          ---
+          duration_ms: 9.8913
+          ...
+        1..5
+    ok 3 - HU-07 — abrir mesa
+      ---
+      duration_ms: 94.2521
+      type: 'suite'
+      ...
+    # Subtest: HU-08 — fuera de servicio y reactivar (solo Administrador)
+        # Subtest: el Operador no puede cambiar el estado → 403
+        ok 1 - el Operador no puede cambiar el estado → 403
+          ---
+          duration_ms: 12.4681
+          ...
+        # Subtest: poner fuera de servicio exige motivo
+        ok 2 - poner fuera de servicio exige motivo
+          ---
+          duration_ms: 7.4848
+          ...
+        # Subtest: solo se aceptan LIBRE y FUERA_SERVICIO como estado manual
+        ok 3 - solo se aceptan LIBRE y FUERA_SERVICIO como estado manual
+          ---
+          duration_ms: 15.9121
+          ...
+        # Subtest: el Admin la pone fuera de servicio con motivo; el motivo se ve en la lista
+        ok 4 - el Admin la pone fuera de servicio con motivo; el motivo se ve en la lista
+          ---
+          duration_ms: 22.8146
+          ...
+        # Subtest: una mesa fuera de servicio no se puede abrir → 409
+        ok 5 - una mesa fuera de servicio no se puede abrir → 409
+          ---
+          duration_ms: 8.7105
+          ...
+        # Subtest: el Admin la reactiva: vuelve a LIBRE (HU-08) y queda auditado
+        ok 6 - el Admin la reactiva: vuelve a LIBRE (HU-08) y queda auditado
+          ---
+          duration_ms: 20.5357
+          ...
+        # Subtest: una mesa en juego no se puede poner fuera de servicio → 409
+        ok 7 - una mesa en juego no se puede poner fuera de servicio → 409
+          ---
+          duration_ms: 11.3822
+          ...
+        1..7
+    ok 4 - HU-08 — fuera de servicio y reactivar (solo Administrador)
+      ---
+      duration_ms: 100.2106
+      type: 'suite'
+      ...
+    # Subtest: Anular apertura (solo Administrador, con motivo, auditada)
+        # Subtest: el Operador no puede anular → 403
+        ok 1 - el Operador no puede anular → 403
+          ---
+          duration_ms: 8.1336
+          ...
+        # Subtest: sin motivo → 400
+        ok 2 - sin motivo → 400
+          ---
+          duration_ms: 7.8658
+          ...
+        # Subtest: el Admin anula: mesa LIBRE, venta ANULADA y auditoría con el motivo
+        ok 3 - el Admin anula: mesa LIBRE, venta ANULADA y auditoría con el motivo
+          ---
+          duration_ms: 21.089
+          ...
+        # Subtest: anular una mesa que no está en juego → 409
+        ok 4 - anular una mesa que no está en juego → 409
+          ---
+          duration_ms: 13.1764
+          ...
+        # Subtest: con consumos no se anula, y el ROLLBACK deja todo como estaba
+        ok 5 - con consumos no se anula, y el ROLLBACK deja todo como estaba
+          ---
+          duration_ms: 30.4062
+          ...
+        1..5
+    ok 5 - Anular apertura (solo Administrador, con motivo, auditada)
+      ---
+      duration_ms: 81.3955
+      type: 'suite'
+      ...
+    # Subtest: CRUD de mesas (Administrador)
+        # Subtest: el Operador no puede crear, editar ni ver las dadas de baja → 403
+        ok 1 - el Operador no puede crear, editar ni ver las dadas de baja → 403
+          ---
+          duration_ms: 22.9086
+          ...
+        # Subtest: crear sin tarifa usa la tarifa por defecto del negocio; orden natural (Mesa 10 después de Mesa 6)
+        ok 2 - crear sin tarifa usa la tarifa por defecto del negocio; orden natural (Mesa 10 después de Mesa 6)
+          ---
+          duration_ms: 18.9553
+          ...
+        # Subtest: nombre duplicado (sin importar mayúsculas ni tildes) → 409
+        ok 3 - nombre duplicado (sin importar mayúsculas ni tildes) → 409
+          ---
+          duration_ms: 6.5615
+          ...
+        # Subtest: validaciones: nombre vacío, tarifa negativa o como texto → 400; JSON roto → 400
+        ok 4 - validaciones: nombre vacío, tarifa negativa o como texto → 400; JSON roto → 400
+          ---
+          duration_ms: 24.9615
+          ...
+        # Subtest: editar nombre y zona queda auditado con antes/después
+        ok 5 - editar nombre y zona queda auditado con antes/después
+          ---
+          duration_ms: 15.306
+          ...
+        # Subtest: dar de baja: no si está en juego; sí si está libre; desaparece de /billar y no se puede abrir
+        ok 6 - dar de baja: no si está en juego; sí si está libre; desaparece de /billar y no se puede abrir
+          ---
+          duration_ms: 59.6946
+          ...
+        # Subtest: dar de alta la vuelve a mostrar; su historial se conserva
+        ok 7 - dar de alta la vuelve a mostrar; su historial se conserva
+          ---
+          duration_ms: 27.6537
+          ...
+        1..7
+    ok 6 - CRUD de mesas (Administrador)
+      ---
+      duration_ms: 176.98
+      type: 'suite'
+      ...
+    # Subtest: HU-16 — abrir y cerrar cada barra de forma independiente
+        # Subtest: ambas barras empiezan cerradas
+        ok 1 - ambas barras empiezan cerradas
+          ---
+          duration_ms: 8.9345
+          ...
+        # Subtest: el Operador abre Barra 1 y Barra 2 sigue cerrada
+        ok 2 - el Operador abre Barra 1 y Barra 2 sigue cerrada
+          ---
+          duration_ms: 13.8172
+          ...
+        # Subtest: abrir y cerrar Barra 2 no afecta a Barra 1
+        ok 3 - abrir y cerrar Barra 2 no afecta a Barra 1
+          ---
+          duration_ms: 24.7212
+          ...
+        # Subtest: abrir una barra abierta o cerrar una cerrada → 409; barra inexistente → 404
+        ok 4 - abrir una barra abierta o cerrar una cerrada → 409; barra inexistente → 404
+          ---
+          duration_ms: 26.296
+          ...
+        1..4
+    ok 7 - HU-16 — abrir y cerrar cada barra de forma independiente
+      ---
+      duration_ms: 74.357
+      type: 'suite'
+      ...
+    # Subtest: HU-17 — varias cuentas simultáneas en una barra
+        # Subtest: no se crean cuentas en una barra cerrada → 409
+        ok 1 - no se crean cuentas en una barra cerrada → 409
+          ---
+          duration_ms: 11.2491
+          ...
+        # Subtest: tres cuentas abiertas a la vez en Barra 1: todas se crean, cada una con su venta
+        ok 2 - tres cuentas abiertas a la vez en Barra 1: todas se crean, cada una con su venta
+          ---
+          duration_ms: 48.7241
+          ...
+        # Subtest: cuenta con nombre libre; repetir el nombre en la misma barra → 409
+        ok 3 - cuenta con nombre libre; repetir el nombre en la misma barra → 409
+          ---
+          duration_ms: 20.425
+          ...
+        # Subtest: GET /bars muestra las 4 cuentas abiertas de Barra 1, en orden de apertura
+        ok 4 - GET /bars muestra las 4 cuentas abiertas de Barra 1, en orden de apertura
+          ---
+          duration_ms: 6.1724
+          ...
+        # Subtest: no se puede cerrar una barra con cuentas abiertas → 409
+        ok 5 - no se puede cerrar una barra con cuentas abiertas → 409
+          ---
+          duration_ms: 7.1201
+          ...
+        # Subtest: una cuenta con consumos no se cancela, y el ROLLBACK la deja abierta
+        ok 6 - una cuenta con consumos no se cancela, y el ROLLBACK la deja abierta
+          ---
+          duration_ms: 18.4489
+          ...
+        # Subtest: cancelar cuentas vacías: CERRADA + venta ANULADA; cancelar dos veces → 409; luego se puede cerrar la barra
+        ok 7 - cancelar cuentas vacías: CERRADA + venta ANULADA; cancelar dos veces → 409; luego se puede cerrar la barra
+          ---
+          duration_ms: 73.8664
+          ...
+        # Subtest: al reabrir, la numeración automática vuelve a empezar en "Cuenta 1"
+        ok 8 - al reabrir, la numeración automática vuelve a empezar en "Cuenta 1"
+          ---
+          duration_ms: 19.0078
+          ...
+        1..8
+    ok 8 - HU-17 — varias cuentas simultáneas en una barra
+      ---
+      duration_ms: 205.9299
+      type: 'suite'
+      ...
+    # Subtest: Rutas desconocidas
+        # Subtest: responden 404 en JSON
+        ok 1 - responden 404 en JSON
+          ---
+          duration_ms: 2.8317
+          ...
+        1..1
+    ok 9 - Rutas desconocidas
+      ---
+      duration_ms: 3.0272
+      type: 'suite'
+      ...
+    1..9
+ok 1 - Sprint 1 — API de Mesas y Barra
+  ---
+  duration_ms: 2192.3077
+  type: 'suite'
+  ...
+1..1
+# tests 47
+# suites 10
+# pass 47
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2209.7592

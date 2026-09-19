@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* NextUIProvider (react-aria) envuelve la app en un <div> contenedor de overlays.
+   Debe ocupar todo el alto para que la cadena de h-full llegue hasta la
+   cuadrícula de mesas; si no, las filas se aplastan (HU-06: sin scroll hasta 10). */
+#root > div {
+  height: 100%;
+}
+
+body {
+  background-color: #ffffff;
+  color: #111111;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-feature-settings: 'tnum' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #111111;
+  border-radius: 99px;
+}
+
+:focus-visible {
+  outline: 3px solid #111111;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Escala tipográfica "Rack & Score" ──────────────────────────────────── */
+.t-score {
+  font-family: 'Anton', 'Oswald', sans-serif;
+  font-size: 56px;
+  line-height: 0.95;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+.t-title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.t-heading {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.t-body-l {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.t-body {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.t-label {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.t-caption {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* ── Superficie "sticker" ────────────────────────────────────────────────
+   Todo lo estructural lleva borde sólido de 2px. Sombra dura (sin blur),
+   reservada para modales y desplegables — nunca en tarjetas de contenido. */
+.card-sticker {
+  background: #ffffff;
+  border: 2px solid #111111;
+  border-radius: 8px;
+}
+.shadow-sticker {
+  box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.15);
+}
+
+.stock-bar {
+  height: 6px;
+  border-radius: 99px;
+  background: #f0efe9;
+  overflow: hidden;
+  border: 1.5px solid #111111;
+}
+.stock-bar-fill {
+  height: 100%;
+  transition: width 300ms ease-out;
+}
+
+.tooltip-anchor {
+  position: relative;
+}
+.tooltip-anchor:hover .tooltip-box {
+  display: block;
+}
+.tooltip-box {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 6px);
+  background: #111111;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 50;
+  max-width: 260px;
+  white-space: normal;
+}
+
+/* Compresión progresiva de la grilla de mesas — nunca hace scroll */
+.mesas-grid {
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: clamp(10px, 1.4vh, 20px);
+}
